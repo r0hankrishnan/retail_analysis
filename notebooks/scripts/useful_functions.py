@@ -18,7 +18,7 @@ def load_analysis_data(relPath:str):
     import pandas as pd
     
     try:
-        df = pd.read_csv(f"../data/analysis{relPath}", index_col=0)
+        df = pd.read_csv(f"../data/analysis/{relPath}", index_col=0)
     except Exception as e:
         print(f"Error: {e}")
         
