@@ -103,3 +103,9 @@ with c2:
     st.dataframe(agg_data[["CustomerID", "LTDValue", "PurchaseFrequency", "PurchaseRecency"]],
                  hide_index=True,
                  use_container_width=True)
+
+
+fig = px.scatter_3d(agg_data, x="LTDValue", y="PurchaseFrequency", z="PurchaseRecency")
+
+st.plotly_chart(fig,
+                use_container_width=True)
