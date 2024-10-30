@@ -1,2 +1,10 @@
+[theme]
+primaryColor="#1E0667"
+backgroundColor="#f2eef0"
+secondaryBackgroundColor="#7ac4ed"
+textColor="#0f1c28"
+font="sans-serrif"
+
+
 [server]
 runOnSave = true

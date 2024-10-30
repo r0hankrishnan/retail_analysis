@@ -55,6 +55,7 @@ if country_filter:
     show_data = data[data["Country"].isin(country_filter)]
 else:
     show_data = data
+
     
 agg_data = show_data.groupby("CustomerID", as_index=False)\
     .agg(
@@ -93,7 +94,8 @@ with c2.container(border=True):
 c1, c2 = st.columns([0.55,0.45])
 with c1:
     st.subheader("Cleaned Data")
-    st.dataframe(show_data,
+    st.dataframe(show_data[["InvoiceNo", "CustomerID", "StockCode",\
+    "Description", "Quantity", "UnitPrice", "Revenue"]],
                  hide_index=True,
                  use_container_width=True)
 with c2:
