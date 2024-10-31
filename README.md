@@ -11,7 +11,6 @@ Using UK online retail data from 2009 to 2011, I will conduct a hypothetical dat
 6. [Takeaways](takeaways)
 
 ## Data
-I am using the [UK online retail data set from the UCI Machine Learning Repository](https://archive.ics.uci.edu/dataset/352/online+retail). This description page for this data lists the following information about the data: 
 I used the [UK online retail data set from the UCI Machine Learning Repository](https://archive.ics.uci.edu/dataset/352/online+retail) for this project. This description page for this data lists the following information about the data: 
 
 ---
