@@ -12,6 +12,7 @@ Using UK online retail data from 2009 to 2011, I will conduct a hypothetical dat
 
 ## Data
 I am using the [UK online retail data set from the UCI Machine Learning Repository](https://archive.ics.uci.edu/dataset/352/online+retail). This description page for this data lists the following information about the data: 
+I used the [UK online retail data set from the UCI Machine Learning Repository](https://archive.ics.uci.edu/dataset/352/online+retail) for this project. This description page for this data lists the following information about the data: 
 
 ---
 This is a transactional data set which contains all the transactions occurring between 01/12/2010 and 09/12/2011 for a UK-based and registered non-store online retail. The company mainly sells unique all-occasion gifts. Many customers of the company are wholesalers.
@@ -40,7 +41,10 @@ This is a transactional data set which contains all the transactions occurring b
 - Country: Country name. Nominal, The name of the country where each customer resides.
 ---
 
+Even before conducting my own exploration, I could tell that I would need to clean, at the very least, the 'InvoiceNo' column to remove cancelled transactions. Since the goal of this project is to cluster **paying** customers, I would have to remove any observations that did not result in revenue or that could not be segmented by customer.
+
 ## Exploration
+After finding, reading about, and loading in the data, I began exploring the data. 
 
 ## Cleaning
 
