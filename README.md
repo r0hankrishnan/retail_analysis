@@ -155,3 +155,4 @@ PURPLE[-2]: UPSELLERS -- This group has a comparitvely low lifetime value but te
 
 GOLD[-1]: ENCOURAGERS -- This group seems to spend a decent amount and have shopped fairly recently. However, they don't appear to shop as often as the UPSELLERS. We should focus on getting these customers into our store more frequently while keeping them happy with sales, promotions, and offers.
 
+![Summary visualization](assets/final_viz.png)
