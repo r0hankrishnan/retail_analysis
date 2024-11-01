@@ -74,13 +74,11 @@ c1, c2 = st.columns(2)
 
 with c1.container(border=True):
     st.metric(label="Most Popular Item",
-            value=top_item.title(),
-            delta=+1)
+            value=top_item.title())
     
 with c2.container(border=True):
     st.metric(label="Average Revenue",
-              value=f"${avg_rev}",
-              delta=+1)
+              value=f"${avg_rev}")
 
 
 with st.expander(label="Cleaned Data"):
