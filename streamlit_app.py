@@ -6,7 +6,7 @@ import plotly.express as px
 from sklearn.cluster import KMeans
 
 #########################
-####### CONFIGS
+####### SETUP
 #########################
 st.set_page_config(
     page_title="Clustering Analysis",
@@ -14,9 +14,6 @@ st.set_page_config(
     layout="wide"
 )
 
-#########################
-####### CACHE
-#########################
 @st.cache_data(max_entries=2)
 def load_clean_data():
     df = pd.read_csv('./data/cleaned/clean_retail.csv')
@@ -25,31 +22,28 @@ def load_clean_data():
     
     df["InvoiceNo"] = df["InvoiceNo"].astype(str)
     df["Revenue"] = df["UnitPrice"] * df["Quantity"]
+    df["CustomerID"] = df["CustomerID"].astype(int).astype(str)
     return df
 
-@st.cache_resource(max_entries=1)
-def load_KMeans():
-    kmeans = KMeans()
-    return kmeans
-
 #########################
-####### GLOBAL OBJECTS
+####### LOAD DATA
 #########################
 
 data = load_clean_data()
 
+country_choice = data["Country"].unique()
+
+max_date = pd.to_datetime(data["InvoiceDate"]).max()
 
 #########################
 ####### UI
 #########################
 
-st.title("Customer Clustering Dashboard")
+st.title("🌏 Compare Customers & Orders Across Countries")
 
-with st.expander(label="Filter Data",
-                 icon=":material/filter_list:"):
-    country_filter = st.multiselect(label="Filter by country:",
-                                options=data["Country"].unique(), 
-                                default=None)
+country_filter = st.multiselect(label= "Filter ⚙️⚙️⚙️",
+                                options=country_choice, 
+                                default= None)
 
 if country_filter:
     show_data = data[data["Country"].isin(country_filter)]
@@ -63,8 +57,6 @@ agg_data = show_data.groupby("CustomerID", as_index=False)\
         PurchaseFrequency = ("InvoiceNo", "nunique"),
         MostRecentPurchase = ("InvoiceDate", "max")
         )
-    
-max_date = pd.to_datetime(data["InvoiceDate"]).max()
 
 agg_data["PurchaseRecency"] = (max_date - pd.to_datetime(agg_data["MostRecentPurchase"])).dt.days
 agg_data["CustomerID"] = agg_data["CustomerID"].astype(int).astype(str)
@@ -91,21 +83,14 @@ with c2.container(border=True):
               delta=+1)
 
 
-c1, c2 = st.columns([0.55,0.45])
-with c1:
-    st.subheader("Cleaned Data")
+with st.expander(label="Cleaned Data"):
+    st.subheader(f"Cleaned Data | Country: {country_filter}")
     st.dataframe(show_data[["InvoiceNo", "CustomerID", "StockCode",\
     "Description", "Quantity", "UnitPrice", "Revenue"]],
                  hide_index=True,
                  use_container_width=True)
-with c2:
-    st.subheader("Grouped Data")
+with st.expander(label="Grouped Data (By Customer)"):
+    st.subheader(f"Grouped Data (By Customer)| Country: {country_filter}")
     st.dataframe(agg_data[["CustomerID", "LTDValue", "PurchaseFrequency", "PurchaseRecency"]],
                  hide_index=True,
                  use_container_width=True)
-
-
-fig = px.scatter_3d(agg_data, x="LTDValue", y="PurchaseFrequency", z="PurchaseRecency")
-
-st.plotly_chart(fig,
-                use_container_width=True)
