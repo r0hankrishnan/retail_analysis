@@ -45,12 +45,8 @@ country_filter = st.multiselect(label= "Filter ⚙️⚙️⚙️",
                                 options=country_choice, 
                                 default= None)
 
-if country_filter:
-    show_data = data[data["Country"].isin(country_filter)]
-else:
-    show_data = data
-
-    
+show_data = data[data["Country"].isin(country_filter)]
+   
 agg_data = show_data.groupby("CustomerID", as_index=False)\
     .agg(
         LTDValue=("Revenue", "sum"),
