@@ -1,20 +1,35 @@
 # Retail Store Analysis
 
+## Table of Contents 
+1. [Introduction](#introduction)
+2. [Takeaways Summary](#takeaways-summary)
+3. [Data](#data)
+4. [Exploration](#exploration)
+5. [Cleaning](#cleaning)
+6. [Feature Engineering](#feature-engineering)
+7. [KMeans Clustering](#kmeans-clustering)
+8. [Takeaways](#takeaways)
+
+---
+## Introduction
 Using UK online retail data from 2009 to 2011, I will conduct a hypothetical data science project starting from data exploration and ending in model development and deployment. The modeling goal of this project is to cluster the store's customers into different groups to better tailor their retention and marketing policies.
 
-## Table of Contents 
-1. [Data](#data)
-2. [Exploration](#exploration)
-3. [Cleaning](#cleaning)
-4. [Feature Engineering](#feature-engineering)
-5. [KMeans Clustering](#kmeans-clustering)
-6. [Takeaways](#takeaways)
+### Role
+For this project, I am acting as a data analyst for a large UK-based online retail store. In this case, rather than making specific predictions, I am interested in understanding the best way to group the store's customers so that they can develop targeted marketing plans for each group. 
 
+### Domain Background
+U.K. retail e-commerce sales reached $482.6 million in 2009, up from a revised $400 million in 2008—an annual gain of approximately 20% percent. From 2002 to 2009, retail e-sales increased at an average annual growth rate of 18.1 percent in the US and similarly in other Western economies, compared with 2.2 percent for total retail sales. Of course, with hindsight in 2024, the online retail space would only continue to grow. Today, more than ever before, it is important for online stores to understand their customers segments in order to gain a competitive advantage in the hyper-crowded online marketplace. 
+
+---
+## Takeaways Summary
+Through exploratory analysis, I identified 3 outlier clusters: high spenders, frequent spenders, and high/frequent spenders. After removing them from the data, the KMeans clustering model yielded 3 additional clusters. After examining and comparing the distributions of each cluster, I came up with a preliminary targeting plan to properly address the main trends of each group. Of course, this data would be even better synthesized by a marketing analyst who could design full-fledged targeted campaigns for each cluster. The full description of each cluster and my plan for each one can be found in the [Takeaways section](#takeaways).
+
+---
 ## Data
 I used the [UK online retail data set from the UCI Machine Learning Repository](https://archive.ics.uci.edu/dataset/352/online+retail) for this project. This description page for this data lists the following information about the data: 
 
----
-This is a transactional data set which contains all the transactions occurring between 01/12/2010 and 09/12/2011 for a UK-based and registered non-store online retail. The company mainly sells unique all-occasion gifts. Many customers of the company are wholesalers.
+
+This is a transactional data set which contains all the transactions occurring between 01/12/2010 and 09/12/2011 for a UK-based and registered non-store online retail. The company mainly sells unique all-occasion gifts. Many customers of the company are wholesalers. Each row represents a transaction between a particular customer and the online store.
 
 **Variables:**
 
@@ -42,6 +57,7 @@ This is a transactional data set which contains all the transactions occurring b
 
 Even before conducting my own exploration, I could tell that I would need to clean, at the very least, the 'InvoiceNo' column to remove cancelled transactions. Since the goal of this project is to cluster **paying** customers, I would have to remove any observations that did not result in revenue or that could not be segmented by customer.
 
+---
 ## Exploration
 My step-by-step process of exploring the data can be found in `notebooks/explore.ipynb`. 
 
@@ -93,6 +109,7 @@ The only negative 'UnitPrice' values were for the debt adjustments. However, the
 
 Lastly, I confirmed that, other than the NA values, the 'CustomerID' column was usable-- which it was.
 
+---
 ## Cleaning
 My full cleaning process can be found in `notebooks/cleaning.ipynb`.
 
@@ -105,6 +122,7 @@ From my exploration, I knew that there were several columns we needed to clean. 
 
 The cleaned data had 3996,621 observations. After all cleaning procedures, we had removed a little over 25% of the data.
 
+---
 ## Feature Engineering
 My full feature engineering process can be found in `notebooks/engineering.ipynb`.
 
@@ -119,7 +137,7 @@ After creating the aggregated data, I extracted the 'LTDValue' and 'PurchaseFreq
 3. A 'PurhcaseFrequency' ouliers data set
 4. A 'LTDValue' and 'PurchaseFrequency' outliers data set
 
-
+---
 ## KMeans Clustering
 To find the optimal k for my KMeans algorithm, I iteratively tested values of k between 2 and 10. Each algorithm was allowed to run 1000 times and had the same random state. After running for 1000 iterations, I calculated each model's inertia and silhouette score and plotted them to compare:
 
@@ -142,6 +160,7 @@ I also examined the outliers at this point:
 
 Final takeaways are summarized below.
 
+---
 ## Takeaways
 RED[0]: GROWTH-- This group has the highest lifetime value and seem to shop fairly frequently. However, they do not seem to be shopping relatively recently. We should focus on getting this group back into our store more regularly so they can continue generating value.
 
