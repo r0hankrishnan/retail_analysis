@@ -166,9 +166,9 @@ Final takeaways are summarized below.
 
 - BLUE[1] > **REPAIR**: This group has relatively low lifetime value, low frequency, and low recency. We need to focus on getting this group more engaged in our store.
 
-- GREEN[2] > **CAPTURE** > This group seems to have shopped very recently though it may have been their first time or a one-off visit as their frequency and lifetime values are low. Since they've visited us recently, we should focus on capturing their business and converting them into recurring customers. 
+- GREEN[2] > **CAPTURE**: This group seems to have shopped very recently though it may have been their first time or a one-off visit as their frequency and lifetime values are low. Since they've visited us recently, we should focus on capturing their business and converting them into recurring customers. 
 
-- ORANGE[-3] > **HIGH-VALUE KEEPERS** > These customers don't have the highest purchase recency but tend to buy fairly frequently and **very** expensively. We should focus on retaining this group at all costs as they consistently provide a high lifetime value. Consider special deals, promotions, or product offerings for this group. 
+- ORANGE[-3] > **HIGH-VALUE KEEPERS**: These customers don't have the highest purchase recency but tend to buy fairly frequently and **very** expensively. We should focus on retaining this group at all costs as they consistently provide a high lifetime value. Consider special deals, promotions, or product offerings for this group. 
 
 - PURPLE[-2] > **UPSELLERS**: This group has a comparitvely low lifetime value but tend to spend frequently and recently. We should focus our nudges on these customers to encourage them to continue visiting our store and spending. Tailoring recommendations based on their previous purchases may prove helpful here.
 
