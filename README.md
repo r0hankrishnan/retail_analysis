@@ -164,14 +164,14 @@ Final takeaways are summarized below.
 ## Takeaways
 - RED[0] > **GROWTH**: This group has the highest lifetime value and seem to shop fairly frequently. However, they do not seem to be shopping relatively recently. We should focus on getting this group back into our store more regularly so they can continue generating value.
 
-BLUE[1] > **REPAIR**: This group has relatively low lifetime value, low frequency, and low recency. We need to focus on getting this group more engaged in our store.
+- BLUE[1] > **REPAIR**: This group has relatively low lifetime value, low frequency, and low recency. We need to focus on getting this group more engaged in our store.
 
-GREEN[2] > **CAPTURE** > This group seems to have shopped very recently though it may have been their first time or a one-off visit as their frequency and lifetime values are low. Since they've visited us recently, we should focus on capturing their business and converting them into recurring customers. 
+- GREEN[2] > **CAPTURE** > This group seems to have shopped very recently though it may have been their first time or a one-off visit as their frequency and lifetime values are low. Since they've visited us recently, we should focus on capturing their business and converting them into recurring customers. 
 
-ORANGE[-3] > **HIGH-VALUE KEEPERS** > These customers don't have the highest purchase recency but tend to buy fairly frequently and **very** expensively. We should focus on retaining this group at all costs as they consistently provide a high lifetime value. Consider special deals, promotions, or product offerings for this group. 
+- ORANGE[-3] > **HIGH-VALUE KEEPERS** > These customers don't have the highest purchase recency but tend to buy fairly frequently and **very** expensively. We should focus on retaining this group at all costs as they consistently provide a high lifetime value. Consider special deals, promotions, or product offerings for this group. 
 
-PURPLE[-2] > **UPSELLERS**: This group has a comparitvely low lifetime value but tend to spend frequently and recently. We should focus our nudges on these customers to encourage them to continue visiting our store and spending. Tailoring recommendations based on their previous purchases may prove helpful here.
+- PURPLE[-2] > **UPSELLERS**: This group has a comparitvely low lifetime value but tend to spend frequently and recently. We should focus our nudges on these customers to encourage them to continue visiting our store and spending. Tailoring recommendations based on their previous purchases may prove helpful here.
 
-GOLD[-1] > **ENCOURAGERS**: This group seems to spend a decent amount and have shopped fairly recently. However, they don't appear to shop as often as the UPSELLERS. We should focus on getting these customers into our store more frequently while keeping them happy with sales, promotions, and offers.
+- GOLD[-1] > **ENCOURAGERS**: This group seems to spend a decent amount and have shopped fairly recently. However, they don't appear to shop as often as the UPSELLERS. We should focus on getting these customers into our store more frequently while keeping them happy with sales, promotions, and offers.
 
 ![Summary visualization](assets/final_viz.png)
