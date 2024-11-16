@@ -22,7 +22,7 @@ U.K. retail e-commerce sales reached $482.6 million in 2009, up from a revised $
 
 ---
 ## Takeaways Summary
-Through exploratory analysis, I identified 3 outlier clusters: high spenders, frequent spenders, and high/frequent spenders. After removing them from the data, the KMeans clustering model yielded 3 additional clusters. After examining and comparing the distributions of each cluster, I came up with a preliminary targeting plan to properly address the main trends of each group. Of course, this data would be even better synthesized by a marketing analyst who could design full-fledged targeted campaigns for each cluster. The full description of each cluster and my plan for each one can be found in the [Takeaways section](#takeaways).
+Through exploratory analysis, I identified 3 outlier clusters: high spenders, frequent spenders, and high/frequent spenders. After removing them from the data, the KMeans clustering model yielded 3 additional clusters. After examining and comparing the distributions of each cluster, I came up with a preliminary targeting plan to properly address the main trends of each group. Of course, this data would be even better synthesized by a marketing analyst who could design full-fledged targeted campaigns for each cluster. The full description of each cluster and my plan for each one can be found in the [takeaways section](#takeaways).
 
 ---
 ## Data
