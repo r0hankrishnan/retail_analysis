@@ -23,6 +23,8 @@ def load_clean_data():
     df["InvoiceNo"] = df["InvoiceNo"].astype(str)
     df["Revenue"] = df["UnitPrice"] * df["Quantity"]
     df["CustomerID"] = df["CustomerID"].astype(int).astype(str)
+    df["InvoiceDate"] = pd.to_datetime(df["InvoiceDate"])
+    df["Year"] = df["InvoiceDate"].dt.year.astype(str)
     return df
 
 #########################
@@ -31,21 +33,44 @@ def load_clean_data():
 
 data = load_clean_data()
 
-country_choice = data["Country"].unique()
+countries = data["Country"].unique()
 
 max_date = pd.to_datetime(data["InvoiceDate"]).max()
+
+years = data["InvoiceDate"].dt.year.unique().astype(str)
+
+years = np.append("All", years)
+
 
 #########################
 ####### UI
 #########################
 
-st.title("🌏 Compare Customers & Orders Across Countries")
+st.title("Compare Customers & Orders Across Countries")
 
-country_filter = st.multiselect(label= "Filter ⚙️⚙️⚙️",
-                                options=country_choice, 
-                                default= None)
+with st.expander(label="Filters"):
+    country_filter = st.multiselect(label= "Filter by country",
+                                    options=countries, 
+                                    default= None)
 
-show_data = data[data["Country"].isin(country_filter)]
+    year_filter = st.selectbox(label="Filter by year",
+                            options=years)
+
+if country_filter:
+    country_data = data[data["Country"].isin(country_filter)]
+else:
+    country_data = data
+    
+if year_filter == "All":
+    show_data = country_data
+else:
+    show_data = country_data[country_data["Year"] == year_filter]
+
+
+if country_filter:
+    display_countries = ", ".join(country_filter)
+else:
+    display_countries = "All"
    
 agg_data = show_data.groupby("CustomerID", as_index=False)\
     .agg(
@@ -68,23 +93,47 @@ avg_rev = round(show_data["Revenue"].mean(),2)
 
 c1, c2 = st.columns(2)
 
-with c1.container(border=True):
-    st.metric(label="Most Popular Item",
-            value=top_item.title())
+if year_filter == "2011":
     
-with c2.container(border=True):
-    st.metric(label="Average Revenue",
-              value=f"${avg_rev}")
+    prev_top_item = country_data[country_data["Year"]=="2010"]["Description"].mode()
+    
+    if len(prev_top_item):
+        prev_top_item = "Previous Year: Multiple"
+    else:
+        prev_top_item = prev_top_item.item()
+    
+    with c1.container(border=True):
+        st.metric(label="Most Popular Item",
+                value=top_item.title(),
+                delta=prev_top_item,
+                delta_color="off",
+                )
+    
+    prev_rev = round(country_data[country_data["Year"]=="2010"]["Revenue"].mean(),2)
+    pct_change = str(round(((avg_rev-prev_rev)/prev_rev) * 100, 2)) + "%"
+    with c2.container(border=True):
+        st.metric(label="Average Revenue",
+                value=f"${avg_rev}",
+                delta= pct_change)
+else:
+    with c1.container(border=True):
+        st.metric(label="Most Popular Item",
+                value=top_item.title())
+    
+    with c2.container(border=True):
+        st.metric(label="Average Revenue",
+            value=f"${avg_rev}")
+
 
 
 with st.expander(label="Cleaned Data"):
-    st.subheader(f"Cleaned Data | Country: {country_filter}")
+    st.subheader(f"Cleaned Data | Country: {display_countries}")
     st.dataframe(show_data[["InvoiceNo", "CustomerID", "StockCode",\
     "Description", "Quantity", "UnitPrice", "Revenue"]],
                  hide_index=True,
                  use_container_width=True)
 with st.expander(label="Grouped Data (By Customer)"):
-    st.subheader(f"Grouped Data (By Customer)| Country: {country_filter}")
+    st.subheader(f"Grouped Data (By Customer)| Country: {display_countries}")
     st.dataframe(agg_data[["CustomerID", "LTDValue", "PurchaseFrequency", "PurchaseRecency"]],
                  hide_index=True,
                  use_container_width=True)
