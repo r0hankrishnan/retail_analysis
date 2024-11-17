@@ -30,7 +30,6 @@ def load_clean_data():
 #########################
 ####### LOAD DATA
 #########################
-
 data = load_clean_data()
 
 countries = data["Country"].unique()
@@ -45,7 +44,6 @@ years = np.append("All", years)
 #########################
 ####### UI
 #########################
-
 st.title("Compare Customers & Orders Across Countries")
 
 with st.expander(label="Filters"):
@@ -56,6 +54,7 @@ with st.expander(label="Filters"):
     year_filter = st.selectbox(label="Filter by year",
                             options=years)
 
+#Conditional filtering
 if country_filter:
     country_data = data[data["Country"].isin(country_filter)]
 else:
@@ -66,12 +65,14 @@ if year_filter == "All":
 else:
     show_data = country_data[country_data["Year"] == year_filter]
 
-
+#Create country list
 if country_filter:
     display_countries = ", ".join(country_filter)
 else:
     display_countries = "All"
    
+   
+#Aggregate data
 agg_data = show_data.groupby("CustomerID", as_index=False)\
     .agg(
         LTDValue=("Revenue", "sum"),
@@ -79,18 +80,22 @@ agg_data = show_data.groupby("CustomerID", as_index=False)\
         MostRecentPurchase = ("InvoiceDate", "max")
         )
 
+#Calculated/Adjusted Fields
 agg_data["PurchaseRecency"] = (max_date - pd.to_datetime(agg_data["MostRecentPurchase"])).dt.days
 agg_data["CustomerID"] = agg_data["CustomerID"].astype(int).astype(str)
 
+#Calculate top item
 top_item = show_data["Description"].mode()
 if len(top_item) != 1:
     top_item = "Multiple most popular items"
 else:
     top_item = top_item.item()
 
+#Calculate mean revenue
 avg_rev = round(show_data["Revenue"].mean(),2)
 
 
+#Conditional metric cards
 c1, c2 = st.columns(2)
 
 if year_filter == "2011":
@@ -125,15 +130,18 @@ else:
             value=f"${avg_rev}")
 
 
+# lineplot = px.line(show_data, x="InvoiceDate", y="Revenue")
+# st.plotly_chart(lineplot)
 
+#Display data tables
 with st.expander(label="Cleaned Data"):
-    st.subheader(f"Cleaned Data | Country: {display_countries}")
+    st.subheader(f"Cleaned Data | Country: {display_countries} | Year: {year_filter}")
     st.dataframe(show_data[["InvoiceNo", "CustomerID", "StockCode",\
     "Description", "Quantity", "UnitPrice", "Revenue"]],
                  hide_index=True,
                  use_container_width=True)
 with st.expander(label="Grouped Data (By Customer)"):
-    st.subheader(f"Grouped Data (By Customer)| Country: {display_countries}")
+    st.subheader(f"Grouped Data (By Customer)| Country: {display_countries} | Year: {year_filter}")
     st.dataframe(agg_data[["CustomerID", "LTDValue", "PurchaseFrequency", "PurchaseRecency"]],
                  hide_index=True,
                  use_container_width=True)
